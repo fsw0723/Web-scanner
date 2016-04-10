@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import urlparse
+from project.items import ProjectItem
 
 
 class App5Spider(scrapy.Spider):
@@ -11,11 +12,17 @@ class App5Spider(scrapy.Spider):
     )
 
     def parse(self, response):
+        # GET requests
         for href in response.css("a::attr('href')"):
             url = response.urljoin(href.extract())
-            yield scrapy.Request(url, callback=self.parse_dir_contents)
+            yield scrapy.Request(url, callback=self.parse_get_requests)
 
-    def parse_dir_contents(self, response):
-        print "current url:" + response.url
+    def parse_get_requests(self, response):
+        item = ProjectItem()
         parsed = urlparse.urlparse(response.url)
-        print urlparse.parse_qs(parsed.query)
+        parameters = urlparse.parse_qs(parsed.query)
+        for parameter in parameters:
+            item['url'] = parsed.path
+            item['param'] = parameter
+            item['type'] = "GET"
+            yield item
