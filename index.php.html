@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html    >
+<head>
+    <base href = "https://app5.com/www/">
+    <meta http-equiv = "Content-Language" content = "en">
+    <meta http-equiv = "keywords" content = "education">
+    <meta http-equiv = "description" content = "Collaborative Elearning Platform">
+    <meta http-equiv = "Content-Type" content = "text/html; charset = utf-8">
+    <link rel="shortcut icon" href="themes/default/images/favicon.png">
+    <link rel = "stylesheet" type = "text/css" href = "themes/modern/css/css_global.css?build=10653">
+        <title>eFront | Refreshing eLearning</title>
+
+    
+    <script type = "text/javascript">
+        var ajaxObjects = new Array();
+                  top.document.title = "eFront | Refreshing eLearning";
+        if (window.name == 'POPUP_FRAME') var popup=1;
+        var globalImageExtension = 'png';
+                var usingHorizontalInterface = true;
+        
+        var sessionLogin = "";
+        var translationsToJS = new Array();
+    </script>
+
+
+<script>var translations = new Array(); /*used for passing language tags to js*/</script>
+
+</head>
+<body  onkeypress = "if (window.eF_js_keypress) eF_js_keypress(event);" onbeforeunload = "if (window.getPeriodicData) getPeriodicData();">
+  <table class = "pageLayout hideRight" id = "pageLayout">
+  <tr><td style = "vertical-align:top">
+   <table style = "width:100%;">
+            <tr><td class = "header" colspan = "3"> <div id = "logo">
+  <a href = "index.php">
+   <img  class = 'handle' src = "themes/modern/images/logo/logo.png" title = "eFront" alt = "eFront" />
+  </a>
+ </div>
+   <div id = "path">
+  <div id = "path_title"><a class='titleLink' href = '/www/index.php'>Start page</a></div>
+  <div id = "tab_handles_div"></div>
+  <div id = "path_language">
+     <select onchange = "var new_location = location.toString().replace(/(\?|&)bypass_language=.*/, '');location = new_location+(new_location.toString().match(/\?/) ? '&' : '?')+'bypass_language='+this.options[this.selectedIndex].value"><option value = "brazilian" >Brasileira</option><option value = "catalan" >Català</option><option value = "czech" >Česky</option><option value = "danish" >Dansk</option><option value = "german" >Deutsch</option><option value = "english" selected>English</option><option value = "greek" >Eλληνικά</option><option value = "filipino" >Filipino</option><option value = "french" >Français</option><option value = "galician" >Galego</option><option value = "croatian" >Hrvatski</option><option value = "dutch" >Nederlands</option><option value = "albanian" >Shqipe</option><option value = "finnish" >Suomi</option><option value = "bulgarian" >Български</option><option value = "hebrew" >עברית</option><option value = "arabic" >العربية</option><option value = "georgian" >ქართული</option><option value = "chinese_simplified" >中国简化</option><option value = "chinese_traditional" >中國傳統</option></select>
+    </div>
+ </div></td></tr>
+          <tr><td class = "layoutColumn left">
+     
+    <div class = "block" style = ";" id = "Login" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, '99dea78007133396a7b8ed70578ac6ae')"  id = "Login_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">Login</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "Login_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+         
+<script type="text/javascript">
+//<![CDATA[
+function validate_login_form(frm) {
+  var value = '';
+  var errFlag = new Array();
+  var _qfGroups = {};
+  _qfMsg = '';
+
+  value = frm.elements['login'].value;
+  if (value == '' && !errFlag['login']) {
+    errFlag['login'] = true;
+    _qfMsg = _qfMsg + '\n - The field \"Login\" is mandatory';
+  }
+
+  value = frm.elements['password'].value;
+  if (value == '' && !errFlag['password']) {
+    errFlag['password'] = true;
+    _qfMsg = _qfMsg + '\n - The field \"Password\" is mandatory';
+  }
+
+  if (_qfMsg != '') {
+    _qfMsg = 'The following errors occured:' + _qfMsg;
+    _qfMsg = _qfMsg + '\nPlease correct the above errors';
+    alert(_qfMsg);
+    return false;
+  }
+  return true;
+}
+//]]>
+</script>
+    <form  class="indexForm" action="index.php?index_page" method="post" id="login_form" onsubmit="try { var myValidator = validate_login_form; } catch(e) { return true; } return myValidator(this);">
+     <input name="_qf__login_form" type="hidden" value="" />
+
+  <div class = "formRow">
+      <div class = "formLabel">
+                <div class = "header">Login</div>
+                         </div>
+      <div class = "formElement">
+             <div class = "field"><input class="inputText" id="login_box" name="login" type="text" /></div>
+                   </div>
+
+     </div>
+  <div class = "formRow">
+      <div class = "formLabel">
+                <div class = "header">Password</div>
+                         </div>
+      <div class = "formElement">
+             <div class = "field"><input class="inputText" tabindex="0" name="password" type="password" /></div>
+                   </div>
+     </div>
+  <div class = "formRow">
+         <div class = "formLabel">
+                <div class = "header">&nbsp;</div>
+                <div class = "explanation"></div>
+         </div>
+      <div class = "formElement">
+             <div class = "field"><input class="flatButton" name="submit_login" value="Login" type="submit" /></div>
+             <div class = "small note"><a href = "/www/index.php?ctg=signup">Create an account</a></div>             <div class = "small note"><a href = "/www/index.php?ctg=reset_pwd">I forgot my password</a></div>             <div class = "small note"><a href = "/www/index.php?ctg=contact">Contact us</a></div>
+             <div class = "small note"><a href = "/www/index.php?ctg=lessons">Lessons list</a></div>         </div>
+
+   
+
+     </div>
+     </form>
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div>
+    <div class = "block" style = ";" id = "Connected+users" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, 'ee689b7f0c659cbde6b972a4b05f1ea9')"  id = "Connected+users_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">Connected users</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "Connected+users_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+     Student D. (student)
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div>
+    <div class = "block" style = ";" id = "Selected+courses" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, '999b4a9e837d3f806160184767b4f31b')"  id = "Selected+courses_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">Selected courses</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "Selected+courses_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+     <!--ajax:cart-->
+<div id = "cart" class = "cart"><div class = "emptyCategory">No data found</div></div><script type = "text/javascript">translations['_COUPON'] = 'Coupon';translations['_CLICKTOENTERDISCOUNTCOUPON'] = 'Click to enter discount coupon';redirectLocation ='index.php?ctg=login&register_lessons=1';</script>
+<!--/ajax:cart-->
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div>    </td>
+    <td class = "layoutColumn center">
+     
+    <div class = "block" style = ";" id = "System+news" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, '841a928ebdf089f8c66c3448b99c40e1')"  id = "System+news_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">System news</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "System+news_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+     <span class = "small emptyCategory">There are no system announcements</span>
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div>
+    <div class = "block" style = ";" id = "Courses" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, '389433c98f23a1519a6df85cc8b04f8a')"  id = "Courses_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">Courses</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "Courses_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+     
+    <div style = "padding-top:12px;padding-bottom:12px">
+     <input type = "text" name = "search_text" value = "Search" onclick="if(this.value=='Search')this.value='';" onblur="if(this.value=='')this.value='Search';" class = "searchBox" onKeyPress = "if (event.keyCode == 13) {filterTree(this, '/www/index.php')}" style = "float:right;background-image:url('themes/default/images/16x16/search.png');"/>
+     <a href = "javascript:void(0)" onclick = "showAll()" id = "catalog_show_all" style = "display:none">Expand all</a>
+     <a href = "javascript:void(0)" onclick = "hideAll()" id = "catalog_hide_all" >Collapse all</a>
+      <div id = "directions_tree">
+     <table class = "directionsTable" id = "direction_1" >
+      <tr class = "lessonsList">
+       <td class = "listPadding" style = "width:1px"><div style = "width:0px;">&nbsp;</div></td>
+       <td class = "listToggle"><img id = "subtree_img1"    src = 'themes/default/images/others/transparent.gif'  class = 'visible sprite16 sprite16-navigate_up' alt = "Click to toggle" title = "Click to toggle" onclick = "Element.extend(this);showHideDirections(this, '', '1', (this.hasClassName('visible')) ? 'hide' : 'show');"></td>
+       <td>
+        <img src = 'themes/default/images/others/transparent.gif' class = 'sprite32 sprite32-categories' >
+        <span style = "display:none" id = "subtree_children_1"></span>
+       <span class = "listName">Ancient Civilizations</span></td>
+      </tr>
+      <tr id = "subtree1" name = "default_visible" > <td></td>
+       <td class = "lessonsList_nocolor">&nbsp;</td>
+       <td colspan = "2">
+        <table width = "100%"><tr class = "directionEntry"><td>
+    <span class = "buyLesson">
+     <span onclick = "addToCart(this, 2, 'lesson');">Free lesson</span>
+     <img  src = 'themes/default/images/others/transparent.gif'  class = 'ajaxHandle sprite16 sprite16-shopping_basket_add' alt = "Add to cart" title = "Add to cart" onclick = "addToCart(this, 2, 'lesson');">
+    </span><a href = "index.php?ctg=lesson_info&lessons_ID=2" class = "info " url = "ask_information.php?lessons_ID=2">Maya civilization</a>
+           
+          </td>
+         </tr>
+        </table>
+        </td></tr>
+       </table>
+     <table class = "directionsTable" id = "direction_2" >
+      <tr class = "lessonsList">
+       <td class = "listPadding" style = "width:1px"><div style = "width:0px;">&nbsp;</div></td>
+       <td class = "listToggle"><img id = "subtree_img2"    src = 'themes/default/images/others/transparent.gif'  class = 'visible sprite16 sprite16-navigate_up' alt = "Click to toggle" title = "Click to toggle" onclick = "Element.extend(this);showHideDirections(this, '', '2', (this.hasClassName('visible')) ? 'hide' : 'show');"></td>
+       <td>
+        <img src = 'themes/default/images/others/transparent.gif' class = 'sprite32 sprite32-categories' >
+        <span style = "display:none" id = "subtree_children_2"></span>
+       <span class = "listName">Programming</span></td>
+      </tr>
+      <tr id = "subtree2" name = "default_visible" > <td></td>
+       <td class = "lessonsList_nocolor">&nbsp;</td>
+       <td colspan = "2">
+        <table width = "100%"><tr class = "directionEntry"><td>
+    <span class = "buyLesson">
+     <span onclick = "addToCart(this, 1, 'lesson');">Free lesson</span>
+     <img  src = 'themes/default/images/others/transparent.gif'  class = 'ajaxHandle sprite16 sprite16-shopping_basket_add' alt = "Add to cart" title = "Add to cart" onclick = "addToCart(this, 1, 'lesson');">
+    </span><a href = "index.php?ctg=lesson_info&lessons_ID=1" class = "info " url = "ask_information.php?lessons_ID=1">Greedy algorithms</a>
+           
+          </td>
+         </tr>
+        </table>
+        </td></tr>
+       <tr id = "subtree2" name = "default_visible" >
+        <td></td>
+        <td class = "lessonsList_nocolor">&nbsp;</td>
+        <td colspan = "2">
+        
+      <table width = "100%">
+       <tr class = "directionEntry">
+        <td>
+        <span class = "buyLesson">
+         <span onclick = "addToCart(this, 1, 'course');">Free course</span>
+         <img  src = 'themes/default/images/others/transparent.gif'  class = 'ajaxHandle sprite16 sprite16-shopping_basket_add' alt = "Add to cart" title = "Add to cart" onclick = "addToCart(this, 1, 'course');">
+        </span><a href = "index.php?ctg=lesson_info&courses_ID=1" class = "boldFont info " url = "ask_information.php?courses_ID=1">How to be a programmer</a>
+        </td>
+       </tr>
+      </table>
+        </td>
+       </tr>
+       </table>
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div>
+    </td>
+    <td class = "layoutColumn right">
+         </td></tr>
+   </table>
+  </td></tr>
+   <tr><td style = "vertical-align:bottom">
+   <table style = "width:100%">
+    <tr><td class = "footer indexFooter" colspan = "3">   <div><a href = "http://www.efrontlearning.net">eFront</a> (version 3.6.9) &bull; Community Edition &bull; <a href = "index.php?ctg=contact">Contact us</a></div>
+ </td></tr>
+   </table>
+  </td></tr>
+  </table>
+
+
+<script type = "text/javascript">
+translations['_COUPON'] = 'Coupon';
+translations['_CLICKTOENTERDISCOUNTCOUPON'] = 'Click to enter discount coupon';
+ redirectLocation ='index.php?ctg=login&register_lessons=1';
+</script>
+
+
+<script>
+
+var currentUnit = '';  var g_servername = 'https://app5.com/www/';
+</script>
+<script>var BOOKMARKTRANSLATION = 'Bookmarks';var NODATAFOUND = 'No data found';</script>
+
+<script type = "text/javascript" src = "js/scripts.php?build=10653&load=EfrontScripts,scriptaculous/prototype,scriptaculous/scriptaculous,scriptaculous/effects,prototip/prototip,efront_ajax,includes/events"> </script> 
+
+
+<script type = "text/javascript" src = "js/scripts.php?build=10653&load=includes/catalog"> </script>
+
+<div id = "user_table" style = "display:none">
+
+    <div class = "block" style = ";" id = "Information" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, 'a82be0f551b8708bc08eb33cd9ded0cf')"  id = "Information_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">Information</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "Information_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+         <table width = "100%">
+        <tr><td align = "left" id = "user_box" style = "padding:3px 3px 4px 5px;"></td></tr>
+    </table>
+
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div>
+</div>
+
+<table id = "popup_table" class = "divPopup" style = "display:none;">
+    <tr class = "defaultRowHeight">
+        <td class = "topTitle" id = "popup_title"></td>
+        <td class = "topTitle" id = "popup_close_cell"><img src = 'themes/default/images/others/transparent.gif' class = 'sprite16 sprite16-close' alt = "Close" name = "" id = "popup_close" title = "Close" onclick = "if (document.getElementById('reloadHidden') && document.getElementById('reloadHidden').value == '1')  {parent.frames[1].location = parent.frames[1].location};eF_js_showDivPopup('', '', this.name);"/>
+    </td></tr>
+    <tr><td colspan = "2" id = "popup_data" style = ""></td></tr>
+    <tr><td colspan = "2" id = "frame_data" style = "display:none;">
+   <iframe name = "POPUP_FRAME" id = "popup_frame" src = "about:blank" >Sorry, but your browser needs to support iframes to see this</iframe>
+    </td></tr>
+</table>
+<div id = "error_details" style = "display:none">
+    <div class = "block" style = ";" id = "Error+Details" >
+        <div class = "blockContents" >
+          <span class = "handles"><img  src = 'themes/default/images/others/transparent.gif'  class = 'open sprite16 sprite16-navigate_up' alt = "Expand/collapse block" title = "Expand/collapse block" onclick = "toggleBlock(this, '8097dac250bd2473c6e3a0fc850c1ce0')"  id = "Error+Details_image"><img  src = 'themes/default/images/others/transparent.gif'  class = 'blockMoveHandle sprite16 sprite16-attachment' alt = "Move block" title = "Move block" onmousedown = "createSortable('firstlist');createSortable('secondlist');if (window.showBorders) showBorders(event)" onmouseup = "if (window.showBorders) hideBorders(event)"></span>
+          <span class = "title">Error Details</span>
+          <span class = "subtitle"></span>
+          
+          <div class = "content" style = ";" id = "Error+Details_content" onmousedown = "if ($('firstlist')) {Sortable.destroy('firstlist');}if ($('secondlist')) {Sortable.destroy('secondlist');}">
+     <pre></pre>
+    </div>
+          <span style = "display:none">&nbsp;</span>
+        </div>
+    </div></div>
+<div id = 'showMessageDiv' style = "display:none"></div>
+<div id="dimmer" class = "dimmerDiv" style = "display:none;"></div>
+<div id = "defaultExceptionHandlerDiv" style = "color:#ffffff;display:none"></div>
+
+
+
+<script>
+
+
+if (parent.frames[0].document.getElementById('dimmer'))
+ parent.frames[0].document.getElementById('dimmer').style.display = 'none'
+
+if (top.sideframe && top.sideframe.document && top.sideframe.document.getElementById('loading_sidebar'))
+    top.sideframe.document.getElementById('loading_sidebar').style.display = 'none'; //no prototype here please
+
+    var __shouldTriggerNextNotifications = false;
+
+
+
+
+
+
+
+if (!usingHorizontalInterface) {
+ if (top.sideframe && top.sideframe.document.getElementById('current_location')) {
+  top.sideframe.document.getElementById('current_location').value = top.mainframe.location.toString();
+ }
+} else {
+ if ($('current_location')) {
+  $('current_location').value = document.location.toString();
+ }
+}
+
+
+
+ translations['_COUPON'] = 'Coupon';
+ translations['_CLICKTOENTERDISCOUNTCOUPON'] = 'Click to enter discount coupon';
+   redirectLocation ='index.php?ctg=login&register_lessons=1';
+ 
+</script><script>if (__shouldTriggerNextNotifications) { new Ajax.Request("send_notifications.php?ajax=1", {method:'get', asynchronous:true}); } </script>
