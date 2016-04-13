@@ -14,6 +14,10 @@ BOT_NAME = 'project'
 SPIDER_MODULES = ['project.spiders']
 NEWSPIDER_MODULE = 'project.spiders'
 
+# DUPEFILTER_CLASS = 'scrapy.dupefilters.RFPDupeFilter'
+DUPEFILTER_CLASS = 'project.duplicate_filter.CustomFilter'
+DUPEFILTER_DEBUG = True
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'project (+http://www.yourdomain.com)'

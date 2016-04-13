@@ -23,8 +23,8 @@ class TestSpider(InitSpider):
     login_page = "https://app5.com/www/index.php?index_page"
 
     def parse(self, response):
-        print "---------------"
-        pprint.pprint(self.link_extractor['next_page'].extract_links(response))
+        # print "---------------"
+        # pprint.pprint(self.link_extractor['next_page'].extract_links(response))
 
         item = ProjectItem()
         parsed = urlparse.urlparse(response.url)
