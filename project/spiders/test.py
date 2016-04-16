@@ -19,8 +19,7 @@ class TestSpider(InitSpider):
     login_page = "https://app5.com/www/index.php?index_page"
 
     def init_request(self):
-        print "init request!!!!!!!!!!"
-        """This function is called before crawling starts."""
+        print "-------------init request-----------"
         return Request(url=self.login_page, callback=self.login)
 
     def login(self, response):
@@ -39,7 +38,6 @@ class TestSpider(InitSpider):
 
     def parse(self, response):
 
-        item = ProjectItem()
         parsed = urlparse.urlparse(response.url)
         parameters = urlparse.parse_qs(parsed.query)
         print "parameters: " + ', '.join(parameters)
@@ -48,15 +46,14 @@ class TestSpider(InitSpider):
         print post_forms
 
         for post_form in post_forms:
-            post_item = ProjectItem()
-            post_item["url"] = post_form["url"]
-            post_item["param"] = post_form["fields"]
-            post_item["type"] = "POST"
-            yield post_item
+            yield self.generate_post_item(post_form)
 
-        item['url'] = parsed.path
+        item = ProjectItem()
+        url = parsed.geturl()
+        item['url'] = url[:url.find('?')]
         item['param'] = parameters
         item['type'] = "GET"
+        item["loginrequired"] = "true"
         yield item
 
         # Find links to the next page
@@ -67,3 +64,11 @@ class TestSpider(InitSpider):
                 continue
 
             yield Request(url=link.url, callback=self.parse)
+
+    def generate_post_item(self, post_form):
+        post_item = ProjectItem()
+        post_item["url"] = post_form["url"]
+        post_item["param"] = post_form["fields"]
+        post_item["type"] = "POST"
+        post_item["loginrequired"] = "true"
+        return post_item

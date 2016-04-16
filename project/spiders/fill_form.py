@@ -2,13 +2,10 @@ from lxml import html
 
 
 def _retrieve_form_element(form):
-    print "-------------------------------------"
-
     fields = {}
 
     for x in form.inputs:
-        print x.name
-        fields[x.name] = x.type
+        fields[x.name] = x.value
 
     return {"fields": fields, "url": form.action}
 
