@@ -20,10 +20,6 @@ class CustomFilter(RFPDupeFilter):
 
     def request_seen(self, request):
         fp = request.method + " " + request.url
-        print ">>>>>>>>>>>>>>>>>>>"
-        print request
-        print fp in self.fingerprints
-        print "<<<<<<<<<<<<<<<<<<<<"
         if fp in self.fingerprints:
             return True
 
