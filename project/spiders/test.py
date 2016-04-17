@@ -23,6 +23,7 @@ class TestSpider(InitSpider):
         self.login_page = kwargs.get('login_page')
         self.username = kwargs.get('username')
         self.password = kwargs.get('password')
+        self.ignore_params = kwargs.get('ignore_params')
 
     def init_request(self):
         print "-------------init request-----------"
@@ -60,7 +61,7 @@ class TestSpider(InitSpider):
             if "logout" in link.url:
                 continue
 
-            yield Request(url=link.url, callback=self.parse)
+            yield Request(url=link.url, meta={'ignore_params': self.ignore_params}, callback=self.parse)
 
     def generate_post_item(self, post_form):
         post_item = ProjectItem()

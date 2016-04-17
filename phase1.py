@@ -26,6 +26,7 @@ def read_config():
             config = {"start_url": config_input["start_url"],
                       "login_page": config_input["loginurl"],
                       "domain": config_input["domain"],
+                      "ignore_params": config_input["ignore_params"],
                       "username": config_input["loginpayload"].values()[0],
                       "password": config_input["loginpayload"].values()[1]}
             configs.append(config)
@@ -34,8 +35,6 @@ def read_config():
 
 
 def crawler_execution(crawler_config, output_file):
-    print "crawler config"
-    print crawler_config
     settings = get_project_settings()
     settings.set("FEED_URI", output_file)
     process = CrawlerProcess(settings)
@@ -45,7 +44,8 @@ def crawler_execution(crawler_config, output_file):
                   domain=crawler_config["domain"],
                   login_page=crawler_config["login_page"],
                   username=crawler_config["username"],
-                  password=crawler_config["password"])
+                  password=crawler_config["password"],
+                  ignore_params=crawler_config["ignore_params"])
     process.start()  # the script will block here until the crawling is finished
 
 
