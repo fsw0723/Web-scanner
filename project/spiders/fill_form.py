@@ -3,9 +3,12 @@ from lxml import html
 
 def _retrieve_form_element(form):
     fields = {}
-
+    print "-------------------"
     for x in form.inputs:
-        fields[x.name] = x.value
+        if x.value is None:
+            x.value = "None"
+
+        fields[x.name] = [x.value]
 
     return {"fields": fields, "url": form.action}
 

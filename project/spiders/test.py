@@ -40,7 +40,7 @@ class TestSpider(InitSpider):
 
         parsed = urlparse.urlparse(response.url)
         parameters = urlparse.parse_qs(parsed.query)
-        print "parameters: " + ', '.join(parameters)
+        # print "parameters: " + ', '.join(parameters)
 
         post_forms = fill_form.fetch_form(response.url, response.body)
         print post_forms
@@ -54,6 +54,7 @@ class TestSpider(InitSpider):
         item['param'] = parameters
         item['type'] = "GET"
         item["loginrequired"] = "true"
+        item["loginurl"] = self.login_page
         yield item
 
         # Find links to the next page
@@ -71,4 +72,5 @@ class TestSpider(InitSpider):
         post_item["param"] = post_form["fields"]
         post_item["type"] = "POST"
         post_item["loginrequired"] = "true"
+        post_item["loginurl"] = self.login_page
         return post_item

@@ -2,13 +2,13 @@ from scrapy import cmdline
 import json
 import os
 
-# try:
-#     os.remove("items.json")
-#     os.remove("phase1.json")
-# except OSError:
-#     pass
-#
-# cmdline.execute("scrapy crawl test -o items.json -t json".split())  # followall is the spider's name
+try:
+    os.remove("items.json")
+    os.remove("phase1.json")
+except OSError:
+    pass
+
+cmdline.execute("scrapy crawl test -o items.json -t json".split())  # followall is the spider's name
 
 
 print "something here----------------------------------------------"

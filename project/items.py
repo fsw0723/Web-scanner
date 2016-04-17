@@ -15,4 +15,5 @@ class ProjectItem(scrapy.Item):
     type = scrapy.Field()
     param = scrapy.Field()
     loginrequired = scrapy.Field()
+    loginurl = scrapy.Field()
 
