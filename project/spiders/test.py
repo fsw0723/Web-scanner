@@ -92,4 +92,9 @@ class TestSpider(InitSpider):
         else:
             item["loginrequired"] = "false"
         item["loginurl"] = self.login_page
+        item["headers"] = {
+            "referer": response.request.headers["Referer"],
+            "cookie": response.request.headers["Cookie"],
+            "user-agent": response.request.headers["User-Agent"]
+        }
         return item

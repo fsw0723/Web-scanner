@@ -20,7 +20,10 @@ DUPEFILTER_DEBUG = True
 
 
 FEED_FORMAT = "json"
-FEED_URI = "items.json"
+
+SPIDER_MIDDLEWARES = {
+'scrapy.contrib.spidermiddleware.referer.RefererMiddleware': True,
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'project (+http://www.yourdomain.com)'
