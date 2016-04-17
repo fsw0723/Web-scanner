@@ -55,7 +55,6 @@ class TestSpider(InitSpider):
 
         # Find links to the next page
         for link in self.link_extractor['next_page'].extract_links(response):
-            print link
             if "http" not in link.url:
                 continue
             if "logout" in link.url:
@@ -81,7 +80,11 @@ class TestSpider(InitSpider):
 
         item = ProjectItem()
         url = parsed.geturl()
-        item['url'] = url[:url.find('?')]
+        if "?" in url:
+            item['url'] = url[:url.find('?')]
+        else:
+            item['url'] = url
+
         item['param'] = parameters
         item['type'] = "GET"
         if self.login_required:

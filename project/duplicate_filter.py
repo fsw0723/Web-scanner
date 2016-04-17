@@ -8,8 +8,6 @@ class CustomFilter(RFPDupeFilter):
 
     def __should_ignore(self, request, fp):
         if request.meta and ("ignore_params" in request.meta.keys()):
-
-            print request.meta["ignore_params"]
             ignore_params = request.meta["ignore_params"]
             for ignore_param in ignore_params:
                 if ignore_param in fp:

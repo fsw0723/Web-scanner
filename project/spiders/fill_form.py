@@ -3,7 +3,6 @@ from lxml import html
 
 def _retrieve_form_element(form):
     fields = {}
-    print "-------------------"
     for x in form.inputs:
         if x.value is None:
             x.value = "None"
