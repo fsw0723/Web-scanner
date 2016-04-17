@@ -10,13 +10,21 @@ import fill_form
 class TestSpider(InitSpider):
     name = "test"
     allowed_domains = ["app5.com"]
-    start_urls = ["https://app5.com/www/index.php",
-                  ]
+    # start_urls = ["https://app5.com/www/index.php",
+    #               ]
     link_extractor = {
         'next_page': LinkExtractor(allow=(), restrict_css=('a'))
     }
 
-    login_page = "https://app5.com/www/index.php?index_page"
+    # login_page = "https://app5.com/www/index.php?index_page"
+
+    def __init__(self, *args, **kwargs):
+        super(TestSpider, self).__init__(*args, **kwargs)
+
+        self.start_urls = [kwargs.get('start_url')]
+        self.login_page = kwargs.get('login_page')
+        self.username = kwargs.get('username')
+        self.password = kwargs.get('password')
 
     def init_request(self):
         print "-------------init request-----------"
@@ -24,7 +32,7 @@ class TestSpider(InitSpider):
 
     def login(self, response):
         return scrapy.FormRequest.from_response(response,
-                                                formdata={'login': 'student', 'password': 'student'},
+                                                formdata={'login': self.username, 'password': self.password},
                                                 callback=self.check_login_response)
 
     def check_login_response(self, response):

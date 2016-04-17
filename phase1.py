@@ -1,4 +1,3 @@
-from scrapy import cmdline
 import json
 import os
 from scrapy.crawler import CrawlerProcess
@@ -17,7 +16,11 @@ def remove_files():
 def crawler_execution():
     process = CrawlerProcess(get_project_settings())
 
-    process.crawl(TestSpider)
+    process.crawl(TestSpider,
+                  start_url="https://app5.com/www/index.php",
+                  login_page="https://app5.com/www/index.php?index_page",
+                  username="admin",
+                  password="admin")
     process.start()  # the script will block here until the crawling is finished
 
 
