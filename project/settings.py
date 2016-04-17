@@ -19,6 +19,9 @@ DUPEFILTER_CLASS = 'project.duplicate_filter.CustomFilter'
 DUPEFILTER_DEBUG = True
 
 
+FEED_FORMAT = "json"
+FEED_URI = "items.json"
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'project (+http://www.yourdomain.com)'
 
