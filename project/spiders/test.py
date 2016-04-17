@@ -3,32 +3,32 @@ from scrapy.linkextractors import LinkExtractor
 import urlparse
 from project.items import ProjectItem
 from scrapy.http import Request
-from scrapy.contrib.spiders.init import InitSpider
+from scrapy.spiders.init import InitSpider
 import fill_form
 
 
 class TestSpider(InitSpider):
     name = "test"
-    allowed_domains = ["app5.com"]
-    # start_urls = ["https://app5.com/www/index.php",
-    #               ]
+    login_required = False
+
     link_extractor = {
         'next_page': LinkExtractor(allow=(), restrict_css=('a'))
     }
-
-    # login_page = "https://app5.com/www/index.php?index_page"
 
     def __init__(self, *args, **kwargs):
         super(TestSpider, self).__init__(*args, **kwargs)
 
         self.start_urls = [kwargs.get('start_url')]
+        self.allowed_domains = [kwargs.get('domain')]
         self.login_page = kwargs.get('login_page')
         self.username = kwargs.get('username')
         self.password = kwargs.get('password')
 
     def init_request(self):
         print "-------------init request-----------"
-        return Request(url=self.login_page, callback=self.login)
+        if self.username and self.password:
+            return Request(url=self.login_page, callback=self.login)
+        return self.initialized()
 
     def login(self, response):
         return scrapy.FormRequest.from_response(response,
@@ -39,34 +39,22 @@ class TestSpider(InitSpider):
         if "incorrect" not in response.body:
             self.log("Successfully logged in. Let's start crawling!")
             # Now the crawling can begin..
+            self.login_required = True
             return self.initialized()
         else:
             self.log("Bad times :(")
             # Something went wrong, we couldn't log in, so nothing happens.
 
     def parse(self, response):
-
-        parsed = urlparse.urlparse(response.url)
-        parameters = urlparse.parse_qs(parsed.query)
-        # print "parameters: " + ', '.join(parameters)
-
         post_forms = fill_form.fetch_form(response.url, response.body)
-        print post_forms
-
         for post_form in post_forms:
             yield self.generate_post_item(post_form)
 
-        item = ProjectItem()
-        url = parsed.geturl()
-        item['url'] = url[:url.find('?')]
-        item['param'] = parameters
-        item['type'] = "GET"
-        item["loginrequired"] = "true"
-        item["loginurl"] = self.login_page
-        yield item
+        yield self.generate_get_item(response)
 
         # Find links to the next page
         for link in self.link_extractor['next_page'].extract_links(response):
+            print link
             if "http" not in link.url:
                 continue
             if "logout" in link.url:
@@ -79,6 +67,25 @@ class TestSpider(InitSpider):
         post_item["url"] = post_form["url"]
         post_item["param"] = post_form["fields"]
         post_item["type"] = "POST"
-        post_item["loginrequired"] = "true"
+        if self.login_required:
+            post_item["loginrequired"] = "true"
+        else:
+            post_item["loginrequired"] = "false"
         post_item["loginurl"] = self.login_page
         return post_item
+
+    def generate_get_item(self, response):
+        parsed = urlparse.urlparse(response.url)
+        parameters = urlparse.parse_qs(parsed.query)
+
+        item = ProjectItem()
+        url = parsed.geturl()
+        item['url'] = url[:url.find('?')]
+        item['param'] = parameters
+        item['type'] = "GET"
+        if self.login_required:
+            item["loginrequired"] = "true"
+        else:
+            item["loginrequired"] = "false"
+        item["loginurl"] = self.login_page
+        return item

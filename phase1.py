@@ -1,45 +1,74 @@
 import json
 import os
+import glob
 from scrapy.crawler import CrawlerProcess
 from project.spiders.test import TestSpider
 from scrapy.utils.project import get_project_settings
 
+output_urls = []
+
 
 def remove_files():
     try:
-        os.remove("items.json")
+        for name in glob.glob('items?.json'):
+            print name
+            os.remove(name)
         os.remove("phase1.json")
     except OSError:
         pass
 
 
-def crawler_execution():
-    process = CrawlerProcess(get_project_settings())
+def read_config():
+    with open('config.json') as config_file:
+        config_inputs = json.load(config_file)["loginurls"]
+        configs = []
+        for config_input in config_inputs:
+            config = {"start_url": config_input["start_url"],
+                      "login_page": config_input["loginurl"],
+                      "domain": config_input["domain"],
+                      "username": config_input["loginpayload"].values()[0],
+                      "password": config_input["loginpayload"].values()[1]}
+            configs.append(config)
+
+    return configs
+
+
+def crawler_execution(crawler_config, output_file):
+    print "crawler config"
+    print crawler_config
+    settings = get_project_settings()
+    settings.set("FEED_URI", output_file)
+    process = CrawlerProcess(settings)
 
     process.crawl(TestSpider,
-                  start_url="https://app5.com/www/index.php",
-                  login_page="https://app5.com/www/index.php?index_page",
-                  username="admin",
-                  password="admin")
+                  start_url=crawler_config["start_url"],
+                  domain=crawler_config["domain"],
+                  login_page=crawler_config["login_page"],
+                  username=crawler_config["username"],
+                  password=crawler_config["password"])
     process.start()  # the script will block here until the crawling is finished
 
 
-def reformat_output():
-    print "something here----------------------------------------------"
-    with open('items.json') as my_file:
+def reformat_output(output_file):
+    with open(output_file) as my_file:
         urls = json.load(my_file)
-
-        output_file = open("phase1.json", 'w')
-        output_urls = []
         for item in urls:
             if item not in output_urls:
                 output_urls.append(item)
 
-        print len(output_urls)
-        output = {"urls": output_urls}
-        output_file.write(json.dumps(output))
 
+def write_to_file():
+    phase1_file = open("phase1.json", 'w')
+    print len(output_urls)
+    output = {"urls": output_urls}
+    phase1_file.write(json.dumps(output))
 
 remove_files()
-crawler_execution()
-reformat_output()
+crawler_configs = read_config()
+for index, crawler_config in enumerate(crawler_configs):
+    output_file = "items" + str(index) + ".json"
+    crawler_execution(crawler_config, output_file)
+    reformat_output(output_file)
+
+write_to_file()
+
