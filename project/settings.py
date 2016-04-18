@@ -20,6 +20,7 @@ DUPEFILTER_DEBUG = True
 
 
 FEED_FORMAT = "json"
+FEED_URI = "items.json"
 
 SPIDER_MIDDLEWARES = {
 'scrapy.contrib.spidermiddleware.referer.RefererMiddleware': True,

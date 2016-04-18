@@ -1,5 +1,6 @@
 {
 	"loginurls": [ {
+		"name": "app4_admin",
 		"domain": "app4.com",
 		"start_url": "https://app4.com/index.php",
 		"loginurl": "https://app4.com/index.php",
@@ -7,6 +8,16 @@
 		"loginpayload": {
 			"username": "admin@admin.com",
 			"password": "admin"
+		}
+	},{
+		"name": "app4_developer",
+		"domain": "app4.com",
+		"start_url": "https://app4.com/index.php",
+		"loginurl": "https://app4.com/index.php",
+		"ignore_params": [],
+		"loginpayload": {
+			"username": "dev@dev.com",
+			"password": "developer"
 		}
 	}]
 }
