@@ -42,7 +42,6 @@ class TestSpider(InitSpider):
                                                 callback=self.check_login_response)
 
     def check_login_response(self, response):
-        print response.body
         if "logout" in response.body.lower():
             self.log("Successfully logged in. Let's start crawling!")
             # Now the crawling can begin..
@@ -57,7 +56,9 @@ class TestSpider(InitSpider):
 
         post_forms = fill_form.fetch_form(response.url, response.body)
         for post_form in post_forms:
-            yield self.generate_post_item(post_form)
+            post_item = self.generate_post_item(post_form)
+            if post_item is not None:
+                yield self.generate_post_item(post_form)
 
         yield self.generate_get_item(response)
 
@@ -94,7 +95,12 @@ class TestSpider(InitSpider):
         else:
             post_item["loginrequired"] = "false"
         post_item["loginurl"] = self.login_page
-        return post_item
+
+        print "----------------------------"
+        print post_item["param"]
+        if bool(post_item["param"]):
+            return post_item
+        return None
 
     def generate_get_item(self, response):
         parsed = urlparse.urlparse(response.url)
