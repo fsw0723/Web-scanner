@@ -1,6 +1,5 @@
 import json
 import os
-import glob
 import sys
 from scrapy.crawler import CrawlerProcess
 from project.spiders.test import TestSpider

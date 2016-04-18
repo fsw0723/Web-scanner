@@ -15,6 +15,8 @@ class TestSpider(InitSpider):
         'next_page': LinkExtractor(allow=(), restrict_css=('a'))
     }
 
+    login_item = None
+
     def __init__(self, *args, **kwargs):
         super(TestSpider, self).__init__(*args, **kwargs)
 
@@ -29,7 +31,7 @@ class TestSpider(InitSpider):
 
     def init_request(self):
         print "-------------init request-----------"
-        if self.username and self.password:
+        if self.username != "" and self.password != "":
             return Request(url=self.start_urls[0], callback=self.login)
         return self.initialized()
 
@@ -52,7 +54,8 @@ class TestSpider(InitSpider):
             # Something went wrong, we couldn't log in, so nothing happens.
 
     def parse(self, response):
-        yield self.login_item
+        if self.login_item:
+            yield self.login_item
 
         post_forms = fill_form.fetch_form(response.url, response.body)
         for post_form in post_forms:
@@ -120,9 +123,17 @@ class TestSpider(InitSpider):
         else:
             item["loginrequired"] = "false"
         item["loginurl"] = self.login_page
+
+        print response.request.headers
+        referer = None
+        cookie = None
+        if "Referer" in response.request.headers.keys():
+            referer = response.request.headers["Referer"]
+        if "Cookie" in response.request.headers.keys():
+            cookie = response.request.headers["Cookie"]
         item["headers"] = {
-            "referer": response.request.headers["Referer"],
-            "cookie": response.request.headers["Cookie"],
+            "referer": referer,
+            "cookie": cookie,
             "user-agent": response.request.headers["User-Agent"]
         }
         return item

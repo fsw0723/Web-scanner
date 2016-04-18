@@ -1,5 +1,15 @@
 {
 	"loginurls": [ {
+		"name": "app4",
+		"domain": "app4.com",
+		"start_url": "https://app4.com/index.php",
+		"loginurl": "https://app4.com/index.php",
+		"ignore_params": [],
+		"loginpayload": {
+			"username": "",
+			"password": ""
+		}
+	},{
 		"name": "app4_admin",
 		"domain": "app4.com",
 		"start_url": "https://app4.com/index.php",
@@ -18,6 +28,26 @@
 		"loginpayload": {
 			"username": "dev@dev.com",
 			"password": "developer"
+		}
+	},{
+		"name": "app4_manager",
+		"domain": "app4.com",
+		"start_url": "https://app4.com/index.php",
+		"loginurl": "https://app4.com/index.php",
+		"ignore_params": [],
+		"loginpayload": {
+			"username": "manager@manager.com",
+			"password": "manager"
+		}
+	},{
+		"name": "app4_user",
+		"domain": "app4.com",
+		"start_url": "https://app4.com/index.php",
+		"loginurl": "https://app4.com/index.php",
+		"ignore_params": [],
+		"loginpayload": {
+			"username": "user@user.com",
+			"password": "user"
 		}
 	}]
 }
