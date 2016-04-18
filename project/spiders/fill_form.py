@@ -6,8 +6,8 @@ def _retrieve_form_element(form):
     for x in form.inputs:
         if x.value is None:
             x.value = "None"
-
-        fields[x.name] = [x.value]
+        if x.name and x.type != "submit":
+            fields[x.name] = [x.value]
 
     return {"fields": fields, "url": form.action}
 

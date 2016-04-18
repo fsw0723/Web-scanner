@@ -35,13 +35,13 @@ class TestSpider(InitSpider):
 
     def login(self, response):
         form_data = get_form_data(response.body, self.username_field, self.password_field, self.username, self.password)
-        return scrapy.FormRequest.from_response(response,
+        return scrapy.FormRequest(self.login_page,
                                                 formdata=form_data,
                                                 callback=self.check_login_response)
 
     def check_login_response(self, response):
-        print response.body.lower()
-        if all(x not in response.body.lower() for x in ["invalid", "incorrect"]):
+        print response.body
+        if "logout" in response.body.lower():
             self.log("Successfully logged in. Let's start crawling!")
             # Now the crawling can begin..
             self.login_required = True
