@@ -35,6 +35,8 @@ class TestSpider(InitSpider):
 
     def login(self, response):
         form_data = get_form_data(response.body, self.username_field, self.password_field, self.username, self.password)
+        self.login_item = self.generate_login_item(form_data)
+
         return scrapy.FormRequest(self.login_page,
                                                 formdata=form_data,
                                                 callback=self.check_login_response)
@@ -51,6 +53,8 @@ class TestSpider(InitSpider):
             # Something went wrong, we couldn't log in, so nothing happens.
 
     def parse(self, response):
+        yield self.login_item
+
         post_forms = fill_form.fetch_form(response.url, response.body)
         for post_form in post_forms:
             yield self.generate_post_item(post_form)
@@ -65,6 +69,20 @@ class TestSpider(InitSpider):
                 continue
 
             yield Request(url=link.url, meta={'ignore_params': self.ignore_params}, callback=self.parse)
+
+    def generate_login_item(self, form_data):
+        post_item = ProjectItem()
+        post_item["url"] = self.login_page
+
+        output_form_data = {}
+        for key in form_data.keys():
+            output_form_data[key] = [form_data[key]]
+        post_item["param"] = output_form_data
+
+        post_item["type"] = "POST"
+        post_item["loginrequired"] = "false"
+        post_item["loginurl"] = self.login_page
+        return post_item
 
     def generate_post_item(self, post_form):
         post_item = ProjectItem()
