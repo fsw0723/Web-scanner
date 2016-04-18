@@ -126,14 +126,10 @@ class TestSpider(InitSpider):
 
         print response.request.headers
         referer = None
-        cookie = None
         if "Referer" in response.request.headers.keys():
             referer = response.request.headers["Referer"]
-        if "Cookie" in response.request.headers.keys():
-            cookie = response.request.headers["Cookie"]
         item["headers"] = {
             "referer": referer,
-            "cookie": cookie,
             "user-agent": response.request.headers["User-Agent"]
         }
         return item
