@@ -28,7 +28,9 @@ def read_config():
                       "domain": config_input["domain"],
                       "ignore_params": config_input["ignore_params"],
                       "username": config_input["loginpayload"].values()[0],
-                      "password": config_input["loginpayload"].values()[1]}
+                      "password": config_input["loginpayload"].values()[1],
+                      "username_field": config_input["loginpayload"].keys()[0],
+                      "password_field": config_input["loginpayload"].keys()[1]}
             configs.append(config)
 
     return configs
@@ -45,6 +47,8 @@ def crawler_execution(crawler_config, output_file):
                   login_page=crawler_config["login_page"],
                   username=crawler_config["username"],
                   password=crawler_config["password"],
+                  username_field=crawler_config["username_field"],
+                  password_field=crawler_config["password_field"],
                   ignore_params=crawler_config["ignore_params"])
     process.start()  # the script will block here until the crawling is finished
 

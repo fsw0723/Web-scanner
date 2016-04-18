@@ -5,7 +5,7 @@ from project.items import ProjectItem
 from scrapy.http import Request
 from scrapy.spiders.init import InitSpider
 import fill_form
-
+from find_login_form import get_form_data
 
 class TestSpider(InitSpider):
     name = "test"
@@ -23,21 +23,25 @@ class TestSpider(InitSpider):
         self.login_page = kwargs.get('login_page')
         self.username = kwargs.get('username')
         self.password = kwargs.get('password')
+        self.username_field = kwargs.get('username_field')
+        self.password_field = kwargs.get('password_field')
         self.ignore_params = kwargs.get('ignore_params')
 
     def init_request(self):
         print "-------------init request-----------"
         if self.username and self.password:
-            return Request(url=self.login_page, callback=self.login)
+            return Request(url=self.start_urls[0], callback=self.login)
         return self.initialized()
 
     def login(self, response):
+        form_data = get_form_data(response.body, self.username_field, self.password_field, self.username, self.password)
         return scrapy.FormRequest.from_response(response,
-                                                formdata={'login': self.username, 'password': self.password},
+                                                formdata=form_data,
                                                 callback=self.check_login_response)
 
     def check_login_response(self, response):
-        if "incorrect" not in response.body:
+        print response.body.lower()
+        if all(x not in response.body.lower() for x in ["invalid", "incorrect"]):
             self.log("Successfully logged in. Let's start crawling!")
             # Now the crawling can begin..
             self.login_required = True
