@@ -11,7 +11,7 @@ def get_form_data(response, origin_url, username_field, password_field, username
         password_field_match = False
         form_data = {}
         for form_input in form.inputs:
-            if form_input.name and form_input.type != "submit":
+            if form_input.name and form_input.type != "submit" and not form_input.checkable:
                 form_data[form_input.name] = form_input.value
             if form_input.name == username_field:
                 username_field_match = True

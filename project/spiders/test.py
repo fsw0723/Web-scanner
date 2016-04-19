@@ -68,7 +68,8 @@ class TestSpider(InitSpider):
         for link in self.link_extractor['next_page'].extract_links(response):
             if "http" not in link.url:
                 continue
-            if "logout" in link.url:
+            if "logout" in link.url or "delete" in link.url:
+                yield self.generate_get_item_with_no_response(link.url)
                 continue
             if link.url.endswith(".jpg"):
                 continue
@@ -133,4 +134,28 @@ class TestSpider(InitSpider):
             "referer": referer,
             "user-agent": response.request.headers["User-Agent"]
         }
+        return item
+
+
+    def generate_get_item_with_no_response(self, response_url):
+        parsed = urlparse.urlparse(response_url)
+        parameters = urlparse.parse_qs(parsed.query)
+
+        item = ProjectItem()
+        url = parsed.geturl()
+        if "?" in url:
+            item['url'] = url[:url.find('?')]
+        else:
+            item['url'] = url
+
+        item['param'] = parameters
+        item['type'] = "GET"
+        if self.login_required:
+            item["loginrequired"] = "true"
+            item["loginurl"] = self.login_url
+        else:
+            item["loginrequired"] = "false"
+            item["loginurl"] = ""
+
+        item["headers"] = {}
         return item
