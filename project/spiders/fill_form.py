@@ -9,7 +9,7 @@ def _retrieve_form_element(form, origin_url):
                 x.value = x.value_options[0]
             else:
                 x.value = "None"
-        if x.name and "submit" in x.keys() and x.type != "submit":
+        if x.name and ("type" in x.keys() and x.type != "submit"):
             fields[x.name] = [x.value]
 
     url = form.action

@@ -32,7 +32,7 @@ class TestSpider(InitSpider):
     def init_request(self):
         print "-------------init request-----------"
         if self.username != "" and self.password != "":
-            return Request(url=self.start_urls[0], callback=self.login)
+            return Request(url=self.login_page, callback=self.login)
         return self.initialized()
 
     def login(self, response):
@@ -71,6 +71,8 @@ class TestSpider(InitSpider):
                 continue
             if "logout" in link.url:
                 continue
+            if link.url.endswith(".jpg"):
+                continue
 
             yield Request(url=link.url, meta={'ignore_params': self.ignore_params}, callback=self.parse)
 
@@ -99,8 +101,6 @@ class TestSpider(InitSpider):
             post_item["loginrequired"] = "false"
         post_item["loginurl"] = self.login_page
 
-        print "----------------------------"
-        print post_item["param"]
         if bool(post_item["param"]):
             return post_item
         return None
@@ -124,7 +124,6 @@ class TestSpider(InitSpider):
             item["loginrequired"] = "false"
         item["loginurl"] = self.login_page
 
-        print response.request.headers
         referer = None
         if "Referer" in response.request.headers.keys():
             referer = response.request.headers["Referer"]
