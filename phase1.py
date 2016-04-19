@@ -22,16 +22,17 @@ def read_config(run_name):
     with open('config.json') as config_file:
         config_inputs = json.load(config_file)["loginurls"]
         for config_input in config_inputs:
-            print config_input
             if config_input["name"] == run_name:
+                print config_input["password_field"]
                 return{"start_url": config_input["start_url"],
                        "login_page": config_input["login_page"],
+                       "login_url": config_input["loginurl"],
                       "domain": config_input["domain"],
                       "ignore_params": config_input["ignore_params"],
-                      "username": config_input["loginpayload"].values()[0],
-                      "password": config_input["loginpayload"].values()[1],
-                      "username_field": config_input["loginpayload"].keys()[0],
-                      "password_field": config_input["loginpayload"].keys()[1]}
+                      "username": config_input["loginpayload"][config_input["username_field"]],
+                      "password": config_input["loginpayload"][config_input["password_field"]],
+                      "username_field": config_input["username_field"],
+                      "password_field": config_input["password_field"]}
 
         raise NameError('Invalid config name')
 
@@ -44,6 +45,7 @@ def crawler_execution(crawler_config):
                   start_url=crawler_config["start_url"],
                   domain=crawler_config["domain"],
                   login_page=crawler_config["login_page"],
+                  login_url=crawler_config["login_url"],
                   username=crawler_config["username"],
                   password=crawler_config["password"],
                   username_field=crawler_config["username_field"],

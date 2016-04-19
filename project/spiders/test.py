@@ -30,6 +30,7 @@ class TestSpider(InitSpider):
         self.ignore_params = kwargs.get('ignore_params')
 
     def init_request(self):
+        print "-------------initialize---------------"
         if self.username != "" and self.password != "":
             return Request(url=self.login_page, callback=self.login)
         return self.initialized()
@@ -60,7 +61,10 @@ class TestSpider(InitSpider):
         for post_form in post_forms:
             post_item = self.generate_post_item(post_form)
             if post_item is not None:
-                yield self.generate_post_item(post_form)
+                yield post_item
+                yield scrapy.FormRequest(post_item["url"],
+                                   formdata=post_item["param"],
+                                   callback=self.parse)
 
         yield self.generate_get_item(response)
 
