@@ -69,7 +69,7 @@ def write_to_file(output_file):
 
 
 run_name = sys.argv[1:][0]
-output_file = run_name + ".json"
+output_file = "../results/" + run_name + ".json"
 
 remove_files(output_file)
 crawler_config = read_config(run_name)
