@@ -9,7 +9,9 @@ def _retrieve_form_element(form, origin_url):
                 x.value = x.value_options[0]
             else:
                 x.value = "None"
-        if x.name and ("type" in x.keys() and x.type != "submit") and not ("Fatal error" in x.value):
+        if type(x) == html.TextareaElement:
+            fields[x.name] = [""]
+        elif x.name and ("type" in x.keys() and x.type != "submit") and not ("Fatal error" in x.value):
             fields[x.name] = [x.value]
 
     url = form.action
