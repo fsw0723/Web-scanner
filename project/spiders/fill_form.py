@@ -5,8 +5,11 @@ def _retrieve_form_element(form, origin_url):
     fields = {}
     for x in form.inputs:
         if x.value is None:
-            x.value = "None"
-        if x.name and x.type != "submit":
+            if type(x) == html.SelectElement:
+                x.value = x.value_options[0]
+            else:
+                x.value = "None"
+        if x.name and "submit" in x.keys() and x.type != "submit":
             fields[x.name] = [x.value]
 
     url = form.action
