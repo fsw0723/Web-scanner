@@ -25,7 +25,7 @@ def read_config(run_name):
             print config_input
             if config_input["name"] == run_name:
                 return{"start_url": config_input["start_url"],
-                      "login_page": config_input["loginurl"],
+                       "login_page": config_input["login_page"],
                       "domain": config_input["domain"],
                       "ignore_params": config_input["ignore_params"],
                       "username": config_input["loginpayload"].values()[0],

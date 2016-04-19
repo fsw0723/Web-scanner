@@ -30,18 +30,17 @@ class TestSpider(InitSpider):
         self.ignore_params = kwargs.get('ignore_params')
 
     def init_request(self):
-        print "-------------init request-----------"
         if self.username != "" and self.password != "":
             return Request(url=self.login_page, callback=self.login)
         return self.initialized()
 
     def login(self, response):
-        form_data = get_form_data(response.body, self.username_field, self.password_field, self.username, self.password)
-        self.login_item = self.generate_login_item(form_data)
+        form_data, action = get_form_data(response.body, response.url, self.username_field, self.password_field, self.username, self.password)
+        self.login_item = self.generate_login_item(form_data, action)
 
-        return scrapy.FormRequest(self.login_page,
-                                                formdata=form_data,
-                                                callback=self.check_login_response)
+        return scrapy.FormRequest(action,
+                                formdata=form_data,
+                                callback=self.check_login_response)
 
     def check_login_response(self, response):
         if "logout" in response.body.lower():
@@ -76,9 +75,10 @@ class TestSpider(InitSpider):
 
             yield Request(url=link.url, meta={'ignore_params': self.ignore_params}, callback=self.parse)
 
-    def generate_login_item(self, form_data):
+    def generate_login_item(self, form_data, action):
+        self.login_url = action
         post_item = ProjectItem()
-        post_item["url"] = self.login_page
+        post_item["url"] = self.login_url
 
         output_form_data = {}
         for key in form_data.keys():
@@ -87,7 +87,7 @@ class TestSpider(InitSpider):
 
         post_item["type"] = "POST"
         post_item["loginrequired"] = "false"
-        post_item["loginurl"] = self.login_page
+        post_item["loginurl"] = ""
         return post_item
 
     def generate_post_item(self, post_form):
@@ -97,9 +97,10 @@ class TestSpider(InitSpider):
         post_item["type"] = "POST"
         if self.login_required:
             post_item["loginrequired"] = "true"
+            post_item["loginurl"] = self.login_url
         else:
             post_item["loginrequired"] = "false"
-        post_item["loginurl"] = self.login_page
+            post_item["loginurl"] = ""
 
         if bool(post_item["param"]):
             return post_item
@@ -120,9 +121,10 @@ class TestSpider(InitSpider):
         item['type'] = "GET"
         if self.login_required:
             item["loginrequired"] = "true"
+            item["loginurl"] = self.login_url
         else:
             item["loginrequired"] = "false"
-        item["loginurl"] = self.login_page
+            item["loginurl"] = ""
 
         referer = None
         if "Referer" in response.request.headers.keys():
