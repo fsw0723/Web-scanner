@@ -1,5 +1,15 @@
 {
 	"loginurls": [ {
+		"name": "app1_bryce",
+		"domain": "app1.com",
+		"start_url": "https://app1.com",
+		"loginurl": "https://app1.com/users/login.php",
+		"ignore_params": ["date"],
+		"loginpayload": {
+			"username": "bryce",
+			"password": "bryce"
+		}
+	},{
 		"name": "app4",
 		"domain": "app4.com",
 		"start_url": "https://app4.com/index.php",
@@ -48,6 +58,36 @@
 		"loginpayload": {
 			"username": "user@user.com",
 			"password": "user"
+		}
+	},{
+		"name": "app5_admin",
+		"domain": "app5.com",
+		"start_url": "https://app5.com/www/index.php",
+		"loginurl": "https://app5.com/www/index.php?index_page",
+		"ignore_params": ["view_calendar"],
+		"loginpayload": {
+			"login": "admin",
+			"password": "admin"
+		}
+	},{
+		"name": "app5_professor",
+		"domain": "app5.com",
+		"start_url": "https://app5.com/www/index.php",
+		"loginurl": "https://app5.com/www/index.php?index_page",
+		"ignore_params": ["view_calendar"],
+		"loginpayload": {
+			"login": "professor",
+			"password": "professor"
+		}
+	},{
+		"name": "app5_student",
+		"domain": "app5.com",
+		"start_url": "https://app5.com/www/index.php",
+		"loginurl": "https://app5.com/www/index.php?index_page",
+		"ignore_params": ["view_calendar"],
+		"loginpayload": {
+			"login": "student",
+			"password": "student"
 		}
 	}]
 }
